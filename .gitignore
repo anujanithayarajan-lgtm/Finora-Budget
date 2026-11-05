@@ -1,0 +1,9 @@
+node_modules/
+**/node_modules/
+**/dist/
+backend/data/
+.env
+.env.*
+!.env.example
+.vercel/
+frontend-screenshot.png
