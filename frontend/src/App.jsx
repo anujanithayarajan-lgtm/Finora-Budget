@@ -13,7 +13,8 @@ import { jsPDF } from 'jspdf';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
 
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/+$/, '');
+const API_URL = (import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api'))
+  .replace(/\/+$/, '');
 const LOGO_URL = '/finora-logo.png';
 
 const loadLogoDataUrl = async () => {

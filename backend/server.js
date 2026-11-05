@@ -249,6 +249,18 @@ const initializeDatabase = async () => {
   console.log('Database initialized successfully');
 };
 
+const databaseReady = initializeDatabase();
+
+app.use(async (req, res, next) => {
+  try {
+    await databaseReady;
+    next();
+  } catch (error) {
+    console.error('Database initialization failed:', error);
+    res.status(503).json({ message: 'Database is unavailable.' });
+  }
+});
+
 const formatDate = (dateString) => {
   const date = new Date(`${dateString}T00:00:00`);
   if (Number.isNaN(date.getTime())) {
@@ -646,13 +658,17 @@ app.get('/api/years', authMiddleware, async (req, res) => {
   }
 });
 
-initializeDatabase()
-  .then(() => {
+if (require.main === module) {
+  databaseReady
+    .then(() => {
     app.listen(PORT, () => {
       console.log(`Backend server running on port ${PORT}`);
     });
-  })
-  .catch((error) => {
-    console.error('Database initialization failed:', error);
-    process.exit(1);
-  });
+    })
+    .catch((error) => {
+      console.error('Database initialization failed:', error);
+      process.exit(1);
+    });
+}
+
+module.exports = app;

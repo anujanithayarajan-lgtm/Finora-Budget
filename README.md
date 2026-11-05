@@ -64,11 +64,11 @@ The local API uses SQLite at `backend/data/finance.db`. To point the frontend at
 
 ## Deployment
 
-The frontend is configured for Vercel. The Express API can run on Render and uses PostgreSQL when `DATABASE_URL` is set; local development continues to use SQLite. The repository includes a Render Blueprint in `render.yaml`.
+The root `vercel.json` deploys the React frontend and Express API as Vercel Services. The backend uses PostgreSQL when `DATABASE_URL` is set and SQLite for local development.
 
 1. Create a PostgreSQL database with a managed provider such as Neon and copy its connection string. Keep it private.
-2. In Render, create a Blueprint from this repository. Set `DATABASE_URL` to the PostgreSQL connection string and use a temporary value for `FRONTEND_URL`; Render generates `JWT_SECRET`.
-3. Import the repository into Vercel with the project root set to `frontend`, and set `VITE_API_URL` to the Render API URL followed by `/api` (for example, `https://your-api.onrender.com/api`).
-4. Deploy the frontend, then set `FRONTEND_URL` in Render to the resulting Vercel origin and redeploy the API.
+2. Import this repository into Vercel with the project root set to the repository root. The root `vercel.json` configures the frontend and API as separate services on one deployment.
+3. Configure `DATABASE_URL` and a long random `JWT_SECRET` as Vercel environment variables. Set `FRONTEND_URL` to the deployed Vercel origin if the API is accessed cross-origin.
+4. Deploy the Vercel project. In production the frontend calls the API through `/api`, routed to the backend service.
 
 The hosted service starts with a fresh database and seeds the demo account. Local SQLite records are not automatically copied to PostgreSQL. Never commit database files, `.env` files, or deployment secrets.

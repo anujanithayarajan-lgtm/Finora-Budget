@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "chart.js": "^4.4.4",
-    "finora-budget": "file:..",
     "jspdf": "^2.5.2",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.0.1",

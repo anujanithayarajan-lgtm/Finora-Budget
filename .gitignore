@@ -7,3 +7,5 @@ backend/data/
 !.env.example
 .vercel/
 frontend-screenshot.png
+.vercel
+.env*

@@ -11,7 +11,6 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "finora-budget": "file:..",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.23.1",
     "sqlite3": "^5.1.7"

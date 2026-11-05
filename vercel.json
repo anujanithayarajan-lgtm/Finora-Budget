@@ -1,8 +1,18 @@
 {
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "finora-budget-api": {
+      "root": "backend",
+      "framework": "express",
+      "buildCommand": "npm install"
+    },
+    "frontend": {
+      "root": "frontend",
+      "framework": "vite"
+    }
+  },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/(.*)", "destination": { "service": "finora-budget-api" } },
+    { "source": "/(.*)", "destination": { "service": "frontend" } }
   ]
 }
