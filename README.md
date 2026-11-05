@@ -69,6 +69,6 @@ The root `vercel.json` deploys the React frontend and Express API as Vercel Serv
 1. Create a PostgreSQL database with a managed provider such as Neon and copy its connection string. Keep it private.
 2. Import this repository into Vercel with the project root set to the repository root. The root `vercel.json` configures the frontend and API as separate services on one deployment.
 3. Configure `DATABASE_URL` and a long random `JWT_SECRET` as Vercel environment variables. Set `FRONTEND_URL` to the deployed Vercel origin if the API is accessed cross-origin.
-4. Deploy the Vercel project. In production the frontend calls the API through `/api`, routed to the backend service.
+4. Deploy the Vercel project. In production the frontend calls the API through `/api`, routed to the backend service; `/transactions` is rewritten to the frontend entry point so direct visits and refreshes work.
 
 The hosted service starts with a fresh database and seeds the demo account. Local SQLite records are not automatically copied to PostgreSQL. Never commit database files, `.env` files, or deployment secrets.
