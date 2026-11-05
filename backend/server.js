@@ -502,7 +502,7 @@ app.get('/api/summary', authMiddleware, async (req, res) => {
        FROM transactions
        ${filter.whereClause}
        GROUP BY ${monthExpression}
-       ORDER BY monthKey DESC`,
+       ORDER BY ${monthKeyAlias} DESC`,
       filter.values
     );
 
