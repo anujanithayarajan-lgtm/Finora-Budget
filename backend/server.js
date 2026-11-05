@@ -261,7 +261,10 @@ app.use(async (req, res, next) => {
   }
 });
 
-const formatDate = (dateString) => {
+const formatDate = (dateValue) => {
+  const dateString = dateValue instanceof Date
+    ? dateValue.toISOString().split('T')[0]
+    : String(dateValue).split('T')[0];
   const date = new Date(`${dateString}T00:00:00`);
   if (Number.isNaN(date.getTime())) {
     return dateString;
@@ -548,7 +551,8 @@ app.get('/api/transactions', authMiddleware, async (req, res) => {
 
     return res.json(rows.map((row) => ({
       ...row,
-      amount: Number(row.amount)
+      amount: Number(row.amount),
+      date: formatDate(row.date)
     })));
   } catch (error) {
     console.error('Transactions fetch error:', error.message);
