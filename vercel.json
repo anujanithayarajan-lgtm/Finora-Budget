@@ -8,12 +8,14 @@
     },
     "frontend": {
       "root": "frontend",
-      "framework": "vite"
+      "framework": "vite",
+      "rewrites": [
+        { "source": "/(.*)", "destination": "/index.html" }
+      ]
     }
   },
   "rewrites": [
     { "source": "/api/(.*)", "destination": { "service": "finora-budget-api" } },
-    { "source": "/transactions", "destination": { "service": "frontend", "path": "/" } },
     { "source": "/(.*)", "destination": { "service": "frontend" } }
   ]
 }
